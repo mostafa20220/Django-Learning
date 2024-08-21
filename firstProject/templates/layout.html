@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <script src="{% static 'js/main.js' %}" defer></script>
+  <title>
+    {% block title %}
+      Django App
+    {% endblock %}
+  </title>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">
+            <span role="img" aria-label="Home" title="Home">
+              🏠
+            </span>
+          </a>
+        </li>
+
+        <li>
+          <a href=" {% url 'posts:posts_list' %}">
+            <span role="img" aria-label="Posts" title='Posts' >
+              📰
+            </span>
+          </a>
+        </li>
+
+        <li>
+          <a href="/about">
+            <span role="img" aria-label="About" title="About" >
+              📖
+            </span>
+          </a>
+        </li>
+
+        {% if user.is_authenticated %}
+
+        <li>
+          <a href="{% url 'posts:new' %}">
+            <span role="img" aria-label="new post" title="new post">
+              📝
+            </span>
+          </a><li>
+
+            <li>
+              <form action="{% url 'users:logout' %}" method="POST">
+                <button class="icon-size" role="img" aria-label="logout" title="logut">
+                  🚪
+                </button>
+                {% csrf_token %}
+              </form>
+              <li>
+
+        {% else %}
+        <li>
+          <a href="{% url 'users:register' %}">
+            <span role="img" aria-label="registeration" title="register">
+              🚀
+            </span>
+          </a>
+        </li>
+
+          <li>
+          <a href="{% url 'users:login' %}">
+            <span role="img" aria-label="login" title="login">
+              🔐
+            </span>
+          </a>
+        </li>
+
+        {% endif %}
+
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

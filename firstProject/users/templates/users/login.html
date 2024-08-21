@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+User Login
+{% endblock %}
+
+{% block content %}
+<section class='flex-col center'>
+  <h1> User Login </h1>
+    <form class='form' action="{% url 'users:login' %}" method="POST" >
+      {% csrf_token %}
+      {{ form }}
+      <button class='btn'> submit </button>
+      {% if request.GET.next %}
+
+      <input type="hidden" name='next' value="{{ request.GET.next }}">
+      {% endif %}
+
+    </form>
+  </section>
+{% endblock %}

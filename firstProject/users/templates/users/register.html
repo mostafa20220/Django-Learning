@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+  Regiter a New User
+{% endblock %}
+
+{% block content %}
+<section class='flex-col center'>
+  <h1> Regiter a New User </h1>
+    <form class='form' action="{% url 'users:register' %}" method="POST" >
+      {% csrf_token %}
+      {{ form }}
+      <button class='btn'> submit </button>
+    </form>
+  </section>
+{% endblock %}
